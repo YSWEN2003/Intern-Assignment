@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Page</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.15/jspdf.plugin.autotable.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Admin Page</h1>
+    </header>
+    <article>
+        <div id="userData">
+        </div>
+
+        <button id="exportPdfButton" onclick="exportToPdf()">Export to PDF</button>
+        <a href="Intern.html">
+            <input type="button" id="done" value="Back to Login">
+        </a>
+    </article>
+
+    <script>
+        
+        function Diplay() {
+            const storedUserData = localStorage.getItem("users");
+
+            if (storedUserData) {
+                const userData = JSON.parse(storedUserData);
+                const userDataDiv = document.getElementById("userData");
+
+                userData.forEach(function(user, index) {
+                    const userDiv = document.createElement("div");
+                    userDiv.innerHTML = `
+                        <p>Name: ${user.name}</p>
+                        <p>Password: ${user.password}</p>
+                        <p>Date: ${user.date}</p>
+                        <p>Address 1: ${user.address1}</p>
+                        <p>Address 2: ${user.address2}</p>
+                        <p>Address 3: ${user.address3}</p>
+                    `;
+                    userDataDiv.appendChild(userDiv);
+                });
+            } else {
+                const userDataDiv = document.getElementById("userData");
+                userDataDiv.innerHTML = "No user data found.";
+            }
+        }
+
+      
+        Diplay();
+
+        window.jsPDF = window.jspdf.jsPDF;
+        function exportToPdf() {
+            const storedUserData = localStorage.getItem("users");
+
+            if (storedUserData) {
+            const userData = JSON.parse(storedUserData);
+            var doc = new jsPDF();
+
+            userData.forEach(function(user, index) {
+            const userContent = 
+               `Name: ${user.name}
+                Password: ${user.password}
+                Date: ${user.date}
+                Address 1: ${user.address1}
+                Address 2: ${user.address2}
+                Address 3: ${user.address3}`
+            ;
+
+            doc.text(userContent, 10, 20 + index * 40);
+        });
+
+        doc.save("userData.pdf");
+        } else {
+        alert("No user data found in local storage.");
+        }
+    }
+    </script>
+</body>
+</html>

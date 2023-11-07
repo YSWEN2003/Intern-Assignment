@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="Register.html" rel="stylesheet">
+    <script src="Details.js" rel="text/javascript"></script>
+</head>
+<body>
+    
+
+    <header>
+        <h1>Login</h1>
+    </header>
+
+    <article>
+        <form>
+            <br><br>
+            <fieldset>
+                <br><br>
+                Name:<br><input type="text" id="names" name="name" placeholder="Enter Name" required><br><br>
+
+                Password: <br><input type="password" id="password" name="password" placeholder="Enter Password" required><br>
+                <input type="checkbox" onclick="show()">
+                <label for="show" id="show">Show Password</label> 
+                <br><br>
+
+              <a href="Register.html">
+                    <input type="button" id="done" value="Back to Register"  >
+              </a>
+              
+              <input type="reset" id="clear" value="Clear" onclick="return confirm_reset();">
+              
+              <button type="button" id="dones"   onclick="Data()">Login</button>
+                
+  
+              <br><br>
+            </fieldset>
+
+        </form>
+    </article>
+</body>
+
+</html>
